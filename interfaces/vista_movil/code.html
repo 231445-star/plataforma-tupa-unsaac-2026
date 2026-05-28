@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>UNSAAC - TUPA Digital</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .andean-pattern {
+            background-color: #fcf9f8;
+            background-image:  linear-gradient(30deg, #e5e2e1 12%, transparent 12.5%, transparent 87%, #e5e2e1 87.5%, #e5e2e1), linear-gradient(150deg, #e5e2e1 12%, transparent 12.5%, transparent 87%, #e5e2e1 87.5%, #e5e2e1), linear-gradient(30deg, #e5e2e1 12%, transparent 12.5%, transparent 87%, #e5e2e1 87.5%, #e5e2e1), linear-gradient(150deg, #e5e2e1 12%, transparent 12.5%, transparent 87%, #e5e2e1 87.5%, #e5e2e1), linear-gradient(60deg, #e5e2e1 25%, transparent 25.5%, transparent 75%, #e5e2e1 75%, #e5e2e1), linear-gradient(60deg, #e5e2e1 25%, transparent 25.5%, transparent 75%, #e5e2e1 75%, #e5e2e1);
+            background-size: 40px 70px;
+            background-position: 0 0, 0 0, 20px 35px, 20px 35px, 0 0, 20px 35px;
+            opacity: 0.03;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed-variant": "#920703",
+                        "on-background": "#1c1b1b",
+                        "tertiary-fixed": "#e5e2db",
+                        "on-primary-container": "#ff907f",
+                        "on-secondary": "#ffffff",
+                        "surface-bright": "#fcf9f8",
+                        "on-secondary-fixed-variant": "#5d4201",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-dim": "#dcd9d9",
+                        "error-container": "#ffdad6",
+                        "inverse-surface": "#313030",
+                        "on-tertiary-fixed-variant": "#474742",
+                        "on-primary-fixed": "#410000",
+                        "outline": "#8e706b",
+                        "on-surface-variant": "#5a403c",
+                        "background": "#fcf9f8",
+                        "primary": "#610000",
+                        "error": "#ba1a1a",
+                        "on-error": "#ffffff",
+                        "inverse-on-surface": "#f3f0ef",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-fixed": "#1c1c18",
+                        "surface-variant": "#e5e2e1",
+                        "outline-variant": "#e3beb8",
+                        "surface-container": "#f0eded",
+                        "secondary-fixed-dim": "#e9c176",
+                        "secondary": "#775a19",
+                        "tertiary-container": "#43423d",
+                        "primary-fixed": "#ffdad4",
+                        "on-surface": "#1c1b1b",
+                        "on-secondary-fixed": "#261900",
+                        "tertiary": "#2c2c28",
+                        "on-secondary-container": "#785a1a",
+                        "surface": "#fcf9f8",
+                        "inverse-primary": "#ffb4a8",
+                        "primary-fixed-dim": "#ffb4a8",
+                        "surface-container-highest": "#e5e2e1",
+                        "on-error-container": "#93000a",
+                        "secondary-fixed": "#ffdea5",
+                        "secondary-container": "#fed488",
+                        "primary-container": "#8b0000",
+                        "on-tertiary-container": "#b0aea8",
+                        "surface-container-high": "#eae7e7",
+                        "on-tertiary": "#ffffff",
+                        "surface-tint": "#b52619",
+                        "surface-container-low": "#f6f3f2",
+                        "tertiary-fixed-dim": "#c9c6c0"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px",
+                        "heritage": "1.25rem"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "base": "8px",
+                        "container-max": "1280px",
+                        "margin-desktop": "40px",
+                        "margin-mobile": "20px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-xl-mobile": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-xl": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "headline-xl-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-surface text-on-background font-body-md min-h-screen flex flex-col relative overflow-x-hidden">
+<!-- Andean Background Layer -->
+<div class="andean-pattern fixed inset-0 pointer-events-none z-0"></div>
+<!-- Mobile Sidebar (Collapsible) -->
+<div class="fixed inset-y-0 left-0 w-72 bg-surface-container-highest z-[60] transform -translate-x-full transition-transform duration-300 ease-in-out shadow-2xl" id="sidebar">
+<div class="p-6">
+<div class="flex justify-between items-center mb-8">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined">account_balance</span>
+</div>
+<span class="font-bold text-primary">UNSAAC</span>
+</div>
+<button class="p-2" id="closeSidebar">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<nav class="space-y-4">
+<a class="flex items-center gap-4 p-3 bg-primary/10 text-primary rounded-xl font-bold" href="#">
+<span class="material-symbols-outlined">home</span>
+                    Inicio
+                </a>
+<a class="flex items-center gap-4 p-3 text-on-surface-variant hover:bg-surface-variant rounded-xl transition-colors" href="#">
+<span class="material-symbols-outlined">article</span>
+                    Guía de Trámites
+                </a>
+<a class="flex items-center gap-4 p-3 text-on-surface-variant hover:bg-surface-variant rounded-xl transition-colors" href="#">
+<span class="material-symbols-outlined">payments</span>
+                    Pagos Tasas
+                </a>
+<a class="flex items-center gap-4 p-3 text-on-surface-variant hover:bg-surface-variant rounded-xl transition-colors" href="#">
+<span class="material-symbols-outlined">help</span>
+                    Preguntas Frecuentes
+                </a>
+</nav>
+</div>
+</div>
+<div class="fixed inset-0 bg-black/50 z-[55] hidden opacity-0 transition-opacity duration-300" id="overlay"></div>
+<!-- Header -->
+<header class="sticky top-0 z-50 flex justify-between items-center px-margin-mobile w-full h-16 bg-surface shadow-sm border-b border-outline-variant">
+<div class="flex items-center gap-3">
+<button class="p-2 -ml-2 text-primary" id="openSidebar">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="flex flex-col leading-none">
+<h1 class="font-headline-md text-body-lg font-bold text-primary">UNSAAC</h1>
+<span class="text-[10px] uppercase tracking-widest text-secondary font-bold">TUPA Digital</span>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-primary active:bg-surface-variant">
+<span class="material-symbols-outlined">search</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-surface-container overflow-hidden border border-outline-variant">
+<img alt="User profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2YsCzO_11OwH0Hvu1yvJwiMS5fztGTgz0g392UWgVwYL-uMpN9iw8LbykR_7J2dAog_j8dpJRg5b0hHGXFfXK-VXLyDQoIcQB4ridh3xFjEYpekYTaOBsQOE4wS-1HcHp6YjjTiL5yXqFkkG_QekDDE4f29EWEnBmMOeYx8Jn48GfntE_FTFjq73BydeDmsd_uvJH5LlB21oW6FL02p041AKcBx5l6GnnQA5o5VpkjB9M9RhBd7BDjY7zOy5G5A2wT6Klrdx620Q"/>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-1 pt-4 pb-24 relative z-10 max-w-md mx-auto w-full">
+<!-- Welcome & Search -->
+<section class="px-margin-mobile mb-6">
+<h2 class="text-headline-md font-bold text-on-surface mb-1">¡Hola, Estudiante!</h2>
+<p class="text-on-surface-variant text-body-md mb-6">¿Qué trámite necesitas realizar hoy?</p>
+<div class="relative">
+<input class="w-full h-14 pl-12 pr-4 bg-surface-container-lowest border border-outline-variant rounded-heritage focus:ring-2 focus:ring-primary focus:border-primary transition-all shadow-sm" placeholder="Buscar trámite por nombre o código..." type="text"/>
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-primary" data-icon="search">search</span>
+</div>
+</section>
+<!-- Scrollable Categories -->
+<section class="mb-8">
+<div class="flex items-center justify-between px-margin-mobile mb-3">
+<h3 class="font-bold text-on-surface">Categorías</h3>
+</div>
+<div class="flex overflow-x-auto gap-4 px-margin-mobile hide-scrollbar">
+<div class="flex-shrink-0 flex flex-col items-center gap-2 group">
+<div class="w-16 h-16 rounded-heritage bg-primary flex items-center justify-center text-on-primary shadow-md">
+<span class="material-symbols-outlined text-[28px]">school</span>
+</div>
+<span class="text-xs font-medium text-on-surface">Académico</span>
+</div>
+<div class="flex-shrink-0 flex flex-col items-center gap-2 group">
+<div class="w-16 h-16 rounded-heritage bg-secondary-container flex items-center justify-center text-on-secondary-container border border-outline-variant">
+<span class="material-symbols-outlined text-[28px]">description</span>
+</div>
+<span class="text-xs font-medium text-on-surface">Grados</span>
+</div>
+<div class="flex-shrink-0 flex flex-col items-center gap-2 group">
+<div class="w-16 h-16 rounded-heritage bg-tertiary-fixed flex items-center justify-center text-on-tertiary-fixed border border-outline-variant">
+<span class="material-symbols-outlined text-[28px]">payments</span>
+</div>
+<span class="text-xs font-medium text-on-surface">Económico</span>
+</div>
+<div class="flex-shrink-0 flex flex-col items-center gap-2 group">
+<div class="w-16 h-16 rounded-heritage bg-surface-container-high flex items-center justify-center text-on-surface-variant border border-outline-variant">
+<span class="material-symbols-outlined text-[28px]">health_and_safety</span>
+</div>
+<span class="text-xs font-medium text-on-surface">Salud</span>
+</div>
+<div class="flex-shrink-0 flex flex-col items-center gap-2 group">
+<div class="w-16 h-16 rounded-heritage bg-surface-container-high flex items-center justify-center text-on-surface-variant border border-outline-variant">
+<span class="material-symbols-outlined text-[28px]">more_horiz</span>
+</div>
+<span class="text-xs font-medium text-on-surface">Otros</span>
+</div>
+</div>
+</section>
+<!-- Procedure List (Vertical) -->
+<section class="px-margin-mobile">
+<div class="flex justify-between items-center mb-4">
+<h3 class="font-bold text-on-surface">Trámites Frecuentes</h3>
+<button class="text-primary font-bold text-sm">Ver todos</button>
+</div>
+<div class="space-y-4">
+<div class="bg-surface-container-lowest p-4 rounded-heritage border border-outline-variant flex items-center gap-4 shadow-sm active:bg-surface-container-low transition-colors cursor-pointer">
+<div class="w-12 h-12 rounded-xl bg-primary-fixed flex-shrink-0 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">assignment</span>
+</div>
+<div class="flex-1">
+<h4 class="font-bold text-on-surface text-sm">Certificado de Estudios</h4>
+<p class="text-[11px] text-on-surface-variant">Unidad: Registros Académicos • S/ 35.00</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">chevron_right</span>
+</div>
+<div class="bg-surface-container-lowest p-4 rounded-heritage border border-outline-variant flex items-center gap-4 shadow-sm active:bg-surface-container-low transition-colors cursor-pointer">
+<div class="w-12 h-12 rounded-xl bg-secondary-container flex-shrink-0 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined">history_edu</span>
+</div>
+<div class="flex-1">
+<h4 class="font-bold text-on-surface text-sm">Grado de Bachiller</h4>
+<p class="text-[11px] text-on-surface-variant">Unidad: Facultad • S/ 150.00</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">chevron_right</span>
+</div>
+<div class="bg-surface-container-lowest p-4 rounded-heritage border border-outline-variant flex items-center gap-4 shadow-sm active:bg-surface-container-low transition-colors cursor-pointer">
+<div class="w-12 h-12 rounded-xl bg-tertiary-fixed flex-shrink-0 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined">badge</span>
+</div>
+<div class="flex-1">
+<h4 class="font-bold text-on-surface text-sm">Duplicado de Carné</h4>
+<p class="text-[11px] text-on-surface-variant">Unidad: Bienestar • S/ 25.00</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">chevron_right</span>
+</div>
+<div class="bg-surface-container-lowest p-4 rounded-heritage border border-outline-variant flex items-center gap-4 shadow-sm active:bg-surface-container-low transition-colors cursor-pointer">
+<div class="w-12 h-12 rounded-xl bg-primary-fixed flex-shrink-0 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">event_note</span>
+</div>
+<div class="flex-1">
+<h4 class="font-bold text-on-surface text-sm">Matrícula Extemporánea</h4>
+<p class="text-[11px] text-on-surface-variant">Unidad: Centro de Cómputo • S/ 50.00</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">chevron_right</span>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 right-0 z-50 bg-surface border-t border-outline-variant h-20 px-4 flex justify-around items-center max-w-md mx-auto w-full shadow-[0_-2px_10px_rgba(0,0,0,0.05)]">
+<div class="flex flex-col items-center gap-1 cursor-pointer group">
+<div class="px-5 py-1 bg-primary-fixed text-primary rounded-full flex items-center justify-center transition-all">
+<span class="material-symbols-outlined" data-weight="fill">dashboard</span>
+</div>
+<span class="text-[10px] font-bold text-primary">Dashboard</span>
+</div>
+<div class="flex flex-col items-center gap-1 cursor-pointer group active:opacity-70">
+<div class="px-5 py-1 text-on-surface-variant rounded-full flex items-center justify-center group-hover:bg-surface-variant transition-all">
+<span class="material-symbols-outlined">list_alt</span>
+</div>
+<span class="text-[10px] font-medium text-on-surface-variant">Mis Trámites</span>
+</div>
+<div class="flex flex-col items-center gap-1 cursor-pointer group active:opacity-70">
+<div class="px-5 py-1 text-on-surface-variant rounded-full flex items-center justify-center group-hover:bg-surface-variant transition-all relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-1 right-4 w-2 h-2 bg-error rounded-full"></span>
+</div>
+<span class="text-[10px] font-medium text-on-surface-variant">Notificaciones</span>
+</div>
+<div class="flex flex-col items-center gap-1 cursor-pointer group active:opacity-70">
+<div class="px-5 py-1 text-on-surface-variant rounded-full flex items-center justify-center group-hover:bg-surface-variant transition-all">
+<span class="material-symbols-outlined">person</span>
+</div>
+<span class="text-[10px] font-medium text-on-surface-variant">Perfil</span>
+</div>
+</nav>
+<script>
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
+        const openSidebarBtn = document.getElementById('openSidebar');
+        const closeSidebarBtn = document.getElementById('closeSidebar');
+
+        function toggleSidebar(open) {
+            if (open) {
+                sidebar.classList.remove('-translate-x-full');
+                overlay.classList.remove('hidden');
+                setTimeout(() => overlay.classList.add('opacity-100'), 10);
+            } else {
+                sidebar.classList.add('-translate-x-full');
+                overlay.classList.remove('opacity-100');
+                setTimeout(() => overlay.classList.add('hidden'), 300);
+            }
+        }
+
+        openSidebarBtn.addEventListener('click', () => toggleSidebar(true));
+        closeSidebarBtn.addEventListener('click', () => toggleSidebar(false));
+        overlay.addEventListener('click', () => toggleSidebar(false));
+
+        // Micro-interaction for tactile feedback
+        document.querySelectorAll('.cursor-pointer, button').forEach(el => {
+            el.addEventListener('touchstart', () => {
+                el.classList.add('scale-95');
+                el.style.transition = 'transform 0.1s ease';
+            });
+            el.addEventListener('touchend', () => {
+                el.classList.remove('scale-95');
+            });
+        });
+    </script>
+</body></html>
