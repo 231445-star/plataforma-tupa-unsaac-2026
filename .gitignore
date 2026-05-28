@@ -1,0 +1,20 @@
+# Archivos temporales de Windows
+Thumbs.db
+Desktop.ini
+
+# Configuración local del editor
+.vscode/
+
+# Archivos temporales de documentos
+*.tmp
+~$*
+
+# Variables privadas
+.env
+
+# Dependencias si posteriormente usan Node.js
+node_modules/
+
+# Archivos temporales si posteriormente usan Python
+__pycache__/
+*.pyc
