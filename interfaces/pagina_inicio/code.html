@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>UNSAAC Portal - TUPA Digital</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Theme Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "on-primary-fixed-variant": "#920703",
+                "on-background": "#1c1b1b",
+                "tertiary-fixed": "#e5e2db",
+                "on-primary-container": "#ff907f",
+                "on-secondary": "#ffffff",
+                "surface-bright": "#fcf9f8",
+                "on-secondary-fixed-variant": "#5d4201",
+                "surface-container-lowest": "#ffffff",
+                "surface-dim": "#dcd9d9",
+                "error-container": "#ffdad6",
+                "inverse-surface": "#313030",
+                "on-tertiary-fixed-variant": "#474742",
+                "on-primary-fixed": "#410000",
+                "outline": "#8e706b",
+                "on-surface-variant": "#5a403c",
+                "background": "#fcf9f8",
+                "primary": "#610000",
+                "error": "#ba1a1a",
+                "on-error": "#ffffff",
+                "inverse-on-surface": "#f3f0ef",
+                "on-primary": "#ffffff",
+                "on-tertiary-fixed": "#1c1c18",
+                "surface-variant": "#e5e2e1",
+                "outline-variant": "#e3beb8",
+                "surface-container": "#f0eded",
+                "secondary-fixed-dim": "#e9c176",
+                "secondary": "#775a19",
+                "tertiary-container": "#43423d",
+                "primary-fixed": "#ffdad4",
+                "on-surface": "#1c1b1b",
+                "on-secondary-fixed": "#261900",
+                "tertiary": "#2c2c28",
+                "on-secondary-container": "#785a1a",
+                "surface": "#fcf9f8",
+                "inverse-primary": "#ffb4a8",
+                "primary-fixed-dim": "#ffb4a8",
+                "surface-container-highest": "#e5e2e1",
+                "on-error-container": "#93000a",
+                "secondary-fixed": "#ffdea5",
+                "secondary-container": "#fed488",
+                "primary-container": "#8b0000",
+                "on-tertiary-container": "#b0aea8",
+                "surface-container-high": "#eae7e7",
+                "on-tertiary": "#ffffff",
+                "surface-tint": "#b52619",
+                "surface-container-low": "#f6f3f2",
+                "tertiary-fixed-dim": "#c9c6c0",
+                "garnet": "#4A0000"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+            },
+            "spacing": {
+                "gutter": "24px",
+                "base": "8px",
+                "container-max": "1280px",
+                "margin-desktop": "40px",
+                "margin-mobile": "20px"
+            },
+            "fontFamily": {
+                "body-md": ["Inter"],
+                "label-md": ["Inter"],
+                "headline-xl-mobile": ["Inter"],
+                "headline-md": ["Inter"],
+                "headline-lg": ["Inter"],
+                "body-lg": ["Inter"],
+                "headline-xl": ["Inter"]
+            },
+            "fontSize": {
+                "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                "headline-xl-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                "headline-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #fcf9f8; }
+        .andean-pattern {
+            background-image: url("https://www.transparenttextures.com/patterns/az-subtle.png");
+            opacity: 0.03;
+        }
+        .custom-shadow {
+            box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.04);
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #610000 0%, #4A0000 100%);
+        }
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0px 10px 25px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-background min-h-screen flex flex-col">
+<!-- Top Header Navigation -->
+<header class="sticky top-0 z-50 bg-white border-b border-outline-variant px-margin-mobile md:px-margin-desktop py-4 shadow-sm">
+<div class="max-w-container-max mx-auto flex items-center justify-between">
+<div class="flex items-center gap-4">
+<img alt="UNSAAC Logo" class="h-10 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVFd-TZtaXSGb3fCSFs0TjSMry8VQqIdXr0TWO5v1I5SwtRo28ckuWlMIeO7XIcU0PbHGKYCymwSnCtu76-3npt8d1y5SCfYsKR9eqA16KTYBuV-BoB45N9q3T1nK2rrjCCQ0shapsBPVTIfau0PE0H11f4mbK1s26PMQ7Gfn7jPQNZzWkYYBztj2M11QnroeeLgAbPPnaNgUQon_QTNC1T4JKKrLtiuCidCrR-GTrDXNYqoOGSYyRqRVBBBZxUDGYFXHko9d2CN0"/>
+<div class="h-8 w-px bg-outline-variant hidden md:block"></div>
+<span class="font-headline-md text-primary font-bold hidden md:block">TUPA Digital — UNSAAC</span>
+</div>
+<nav class="hidden lg:flex items-center gap-8">
+<a class="font-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">Trámites</a>
+<a class="font-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">Servicios</a>
+<a class="font-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">Consultar Estado</a>
+<a class="font-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">Ayuda</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="px-6 py-2 bg-primary text-white rounded-full font-label-md hover:bg-garnet transition-colors">
+                Iniciar Sesión
+            </button>
+<button class="md:hidden material-symbols-outlined text-on-surface">menu</button>
+</div>
+</div>
+</header>
+<main class="flex-1">
+<!-- Hero Section -->
+<section class="hero-gradient text-white py-16 px-margin-mobile md:py-24 relative overflow-hidden">
+<div class="andean-pattern absolute inset-0 opacity-10"></div>
+<div class="max-w-4xl mx-auto text-center relative z-10">
+<h1 class="font-headline-xl text-headline-xl-mobile md:text-headline-xl mb-6">Realiza tus trámites universitarios en línea</h1>
+<p class="font-body-lg text-lg opacity-90 mb-10 max-w-2xl mx-auto">Consulta requisitos, costos y plazos de todos los trámites administrativos y académicos de la UNSAAC desde un solo lugar.</p>
+<div class="relative max-w-2xl mx-auto mb-8">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full pl-12 pr-6 py-4 rounded-full bg-white text-on-surface border-none shadow-xl focus:ring-4 focus:ring-primary/20 text-lg" placeholder="Busca un trámite (ej. Bachiller, Matrícula, Traslado)..." type="text"/>
+</div>
+<div class="flex flex-wrap justify-center gap-3">
+<span class="px-4 py-2 bg-white/10 backdrop-blur-md rounded-full text-xs font-bold border border-white/20 cursor-pointer hover:bg-white/20">Admisión</span>
+<span class="px-4 py-2 bg-white/10 backdrop-blur-md rounded-full text-xs font-bold border border-white/20 cursor-pointer hover:bg-white/20">Matrícula</span>
+<span class="px-4 py-2 bg-white/10 backdrop-blur-md rounded-full text-xs font-bold border border-white/20 cursor-pointer hover:bg-white/20">Grados y Títulos</span>
+<span class="px-4 py-2 bg-white/10 backdrop-blur-md rounded-full text-xs font-bold border border-white/20 cursor-pointer hover:bg-white/20">Traslados</span>
+<span class="px-4 py-2 bg-white/10 backdrop-blur-md rounded-full text-xs font-bold border border-white/20 cursor-pointer hover:bg-white/20">Personal</span>
+</div>
+</div>
+</section>
+<!-- Categories Section -->
+<section class="py-16 px-margin-mobile md:px-margin-desktop bg-surface-container-low">
+<div class="max-w-container-max mx-auto">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-8 text-center">Explorar por Categoría</h2>
+<div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+<div class="bg-white p-6 rounded-2xl border border-outline-variant flex flex-col items-center text-center card-hover transition-all cursor-pointer">
+<div class="w-14 h-14 bg-primary-fixed rounded-full flex items-center justify-center text-primary mb-4">
+<span class="material-symbols-outlined text-3xl">school</span>
+</div>
+<span class="font-label-md text-on-surface font-bold">Educación/Académico</span>
+</div>
+<div class="bg-white p-6 rounded-2xl border border-outline-variant flex flex-col items-center text-center card-hover transition-all cursor-pointer">
+<div class="w-14 h-14 bg-secondary-fixed rounded-full flex items-center justify-center text-secondary mb-4">
+<span class="material-symbols-outlined text-3xl">how_to_reg</span>
+</div>
+<span class="font-label-md text-on-surface font-bold">Admisión</span>
+</div>
+<div class="bg-white p-6 rounded-2xl border border-outline-variant flex flex-col items-center text-center card-hover transition-all cursor-pointer">
+<div class="w-14 h-14 bg-tertiary-fixed rounded-full flex items-center justify-center text-tertiary mb-4">
+<span class="material-symbols-outlined text-3xl">edit_calendar</span>
+</div>
+<span class="font-label-md text-on-surface font-bold">Matrícula</span>
+</div>
+<div class="bg-white p-6 rounded-2xl border border-outline-variant flex flex-col items-center text-center card-hover transition-all cursor-pointer">
+<div class="w-14 h-14 bg-primary-fixed-dim rounded-full flex items-center justify-center text-primary mb-4">
+<span class="material-symbols-outlined text-3xl">workspace_premium</span>
+</div>
+<span class="font-label-md text-on-surface font-bold">Posgrado</span>
+</div>
+<div class="bg-white p-6 rounded-2xl border border-outline-variant flex flex-col items-center text-center card-hover transition-all cursor-pointer">
+<div class="w-14 h-14 bg-surface-container-high rounded-full flex items-center justify-center text-on-surface-variant mb-4">
+<span class="material-symbols-outlined text-3xl">badge</span>
+</div>
+<span class="font-label-md text-on-surface font-bold">Personal Administrativo</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Frequent Procedures Section -->
+<section class="py-16 px-margin-mobile md:px-margin-desktop bg-surface">
+<div class="max-w-container-max mx-auto">
+<div class="flex justify-between items-center mb-10">
+<h2 class="font-headline-md text-headline-md text-on-surface">Los más solicitados</h2>
+<a class="text-primary font-label-md flex items-center gap-1 hover:underline" href="#">Ver todos los trámites <span class="material-symbols-outlined text-sm">arrow_forward</span></a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Card 1 -->
+<div class="bg-white p-6 rounded-3xl border border-outline-variant custom-shadow card-hover transition-all flex flex-col justify-between cursor-pointer">
+<div>
+<div class="flex justify-between items-start mb-4">
+<span class="px-3 py-1 bg-primary-fixed text-on-primary-fixed text-[10px] font-bold uppercase rounded-full">Académico</span>
+<span class="material-symbols-outlined text-on-surface-variant">favorite</span>
+</div>
+<h3 class="font-headline-md text-xl mb-2">Traslado Externo</h3>
+<p class="text-on-surface-variant text-sm mb-6">Trámite para estudiantes de otras universidades que deseen continuar estudios en la UNSAAC.</p>
+</div>
+<div class="flex items-center justify-between pt-6 border-t border-outline-variant">
+<div class="flex flex-col">
+<span class="text-xs text-on-surface-variant uppercase font-bold tracking-tighter">Costo</span>
+<span class="font-bold text-primary">S/. 450.00</span>
+</div>
+<div class="flex flex-col text-right">
+<span class="text-xs text-on-surface-variant uppercase font-bold tracking-tighter">Plazo</span>
+<span class="font-bold">5 días</span>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-white p-6 rounded-3xl border border-outline-variant custom-shadow card-hover transition-all flex flex-col justify-between cursor-pointer">
+<div>
+<div class="flex justify-between items-start mb-4">
+<span class="px-3 py-1 bg-secondary-fixed text-on-secondary-fixed text-[10px] font-bold uppercase rounded-full">Grados</span>
+<span class="material-symbols-outlined text-on-surface-variant">favorite</span>
+</div>
+<h3 class="font-headline-md text-xl mb-2">Grado de Bachiller</h3>
+<p class="text-on-surface-variant text-sm mb-6">Obtención del grado académico de bachiller para egresados de las diversas facultades.</p>
+</div>
+<div class="flex items-center justify-between pt-6 border-t border-outline-variant">
+<div class="flex flex-col">
+<span class="text-xs text-on-surface-variant uppercase font-bold tracking-tighter">Costo</span>
+<span class="font-bold text-primary">Ver detalle</span>
+</div>
+<div class="flex flex-col text-right">
+<span class="text-xs text-on-surface-variant uppercase font-bold tracking-tighter">Plazo</span>
+<span class="font-bold">Variable</span>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-white p-6 rounded-3xl border border-outline-variant custom-shadow card-hover transition-all flex flex-col justify-between cursor-pointer">
+<div>
+<div class="flex justify-between items-start mb-4">
+<span class="px-3 py-1 bg-tertiary-fixed text-on-tertiary-fixed text-[10px] font-bold uppercase rounded-full">Matrícula</span>
+<span class="material-symbols-outlined text-on-surface-variant">favorite</span>
+</div>
+<h3 class="font-headline-md text-xl mb-2">Matrícula de Ingresante</h3>
+<p class="text-on-surface-variant text-sm mb-6">Proceso de registro inicial para nuevos estudiantes admitidos a la universidad.</p>
+</div>
+<div class="flex items-center justify-between pt-6 border-t border-outline-variant">
+<div class="flex flex-col">
+<span class="text-xs text-on-surface-variant uppercase font-bold tracking-tighter">Costo</span>
+<span class="font-bold text-primary">S/. 113.00</span>
+</div>
+<div class="flex flex-col text-right">
+<span class="text-xs text-on-surface-variant uppercase font-bold tracking-tighter">Plazo</span>
+<span class="font-bold">1 día</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Quick Query Section -->
+<section class="py-16 px-margin-mobile md:px-margin-desktop bg-surface-container-high border-y border-outline-variant">
+<div class="max-w-4xl mx-auto">
+<div class="bg-white p-8 md:p-12 rounded-[2rem] shadow-sm flex flex-col md:flex-row items-center gap-8 border border-outline-variant">
+<div class="flex-1">
+<h3 class="font-headline-md text-headline-md mb-2">Consulta tu expediente</h3>
+<p class="text-on-surface-variant">Ingresa tus datos para conocer el estado actual de tu solicitud en tiempo real.</p>
+</div>
+<div class="flex-1 w-full flex flex-col gap-4">
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div>
+<label class="block text-xs font-bold text-on-surface-variant mb-1 uppercase tracking-wider">Número de expediente</label>
+<input class="w-full px-4 py-3 bg-surface rounded-xl border-outline-variant focus:ring-primary focus:border-primary" placeholder="EXP-2024-XXXX" type="text"/>
+</div>
+<div>
+<label class="block text-xs font-bold text-on-surface-variant mb-1 uppercase tracking-wider">DNI</label>
+<input class="w-full px-4 py-3 bg-surface rounded-xl border-outline-variant focus:ring-primary focus:border-primary" placeholder="XXXXXXXX" type="text"/>
+</div>
+</div>
+<button class="w-full py-4 bg-primary text-white rounded-xl font-bold hover:bg-garnet transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">search</span>
+                        Consultar Estado
+                    </button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-highest border-t border-outline-variant py-16 px-margin-mobile md:px-margin-desktop">
+<div class="max-w-container-max mx-auto">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+<div class="md:col-span-2">
+<div class="flex items-center gap-4 mb-6">
+<img alt="UNSAAC Logo" class="h-12 w-auto grayscale brightness-50" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVFd-TZtaXSGb3fCSFs0TjSMry8VQqIdXr0TWO5v1I5SwtRo28ckuWlMIeO7XIcU0PbHGKYCymwSnCtu76-3npt8d1y5SCfYsKR9eqA16KTYBuV-BoB45N9q3T1nK2rrjCCQ0shapsBPVTIfau0PE0H11f4mbK1s26PMQ7Gfn7jPQNZzWkYYBztj2M11QnroeeLgAbPPnaNgUQon_QTNC1T4JKKrLtiuCidCrR-GTrDXNYqoOGSYyRqRVBBBZxUDGYFXHko9d2CN0"/>
+<span class="font-headline-md text-on-surface font-bold">UNSAAC</span>
+</div>
+<p class="text-on-surface-variant mb-6 max-w-sm">Universidad Nacional de San Antonio Abad del Cusco. Liderazgo académico y compromiso social en el corazón de los Andes.</p>
+<div class="space-y-2">
+<div class="flex items-start gap-3 text-on-surface-variant">
+<span class="material-symbols-outlined text-primary">location_on</span>
+<span class="text-sm">Av. de la Cultura, N° 733, Cusco - Perú</span>
+</div>
+<div class="flex items-start gap-3 text-on-surface-variant">
+<span class="material-symbols-outlined text-primary">schedule</span>
+<span class="text-sm">Lunes a Viernes: 08:00 AM - 04:00 PM</span>
+</div>
+</div>
+</div>
+<div>
+<h4 class="font-bold text-on-surface mb-6 uppercase text-xs tracking-widest">Institucional</h4>
+<ul class="space-y-4">
+<li><a class="text-on-surface-variant hover:text-primary transition-colors text-sm" href="#">Directorio</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-colors text-sm" href="#">Normativa</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-colors text-sm" href="#">Transparencia</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-colors text-sm" href="#">Correo Institucional</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold text-on-surface mb-6 uppercase text-xs tracking-widest">Soporte</h4>
+<ul class="space-y-4">
+<li><a class="text-on-surface-variant hover:text-primary transition-colors text-sm" href="#">Contacto</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-colors text-sm" href="#">Política de Privacidad</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-colors text-sm" href="#">Preguntas Frecuentes</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-colors text-sm" href="#">Libro de Reclamaciones</a></li>
+</ul>
+</div>
+</div>
+<div class="pt-8 border-t border-outline-variant flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="text-on-surface-variant text-xs">© 2024 Universidad Nacional de San Antonio Abad del Cusco. Todos los derechos reservados.</p>
+<div class="flex gap-6">
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">language</span></a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">share</span></a>
+</div>
+</div>
+</div>
+</footer>
+</body></html>

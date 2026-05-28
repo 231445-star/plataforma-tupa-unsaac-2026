@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>UNSAAC Portal - Panel Administrativo</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed-variant": "#920703",
+                        "on-background": "#1c1b1b",
+                        "tertiary-fixed": "#e5e2db",
+                        "on-primary-container": "#ff907f",
+                        "on-secondary": "#ffffff",
+                        "surface-bright": "#fcf9f8",
+                        "on-secondary-fixed-variant": "#5d4201",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-dim": "#dcd9d9",
+                        "error-container": "#ffdad6",
+                        "inverse-surface": "#313030",
+                        "on-tertiary-fixed-variant": "#474742",
+                        "on-primary-fixed": "#410000",
+                        "outline": "#8e706b",
+                        "on-surface-variant": "#5a403c",
+                        "background": "#fcf9f8",
+                        "primary": "#610000",
+                        "error": "#ba1a1a",
+                        "on-error": "#ffffff",
+                        "inverse-on-surface": "#f3f0ef",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-fixed": "#1c1c18",
+                        "surface-variant": "#e5e2e1",
+                        "outline-variant": "#e3beb8",
+                        "surface-container": "#f0eded",
+                        "secondary-fixed-dim": "#e9c176",
+                        "secondary": "#775a19",
+                        "tertiary-container": "#43423d",
+                        "primary-fixed": "#ffdad4",
+                        "on-surface": "#1c1b1b",
+                        "on-secondary-fixed": "#261900",
+                        "tertiary": "#2c2c28",
+                        "on-secondary-container": "#785a1a",
+                        "surface": "#fcf9f8",
+                        "inverse-primary": "#ffb4a8",
+                        "primary-fixed-dim": "#ffb4a8",
+                        "surface-container-highest": "#e5e2e1",
+                        "on-error-container": "#93000a",
+                        "secondary-fixed": "#ffdea5",
+                        "secondary-container": "#fed488",
+                        "primary-container": "#8b0000",
+                        "on-tertiary-container": "#b0aea8",
+                        "surface-container-high": "#eae7e7",
+                        "on-tertiary": "#ffffff",
+                        "surface-tint": "#b52619",
+                        "surface-container-low": "#f6f3f2",
+                        "tertiary-fixed-dim": "#c9c6c0"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "base": "8px",
+                        "container-max": "1280px",
+                        "margin-desktop": "40px",
+                        "margin-mobile": "20px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-xl-mobile": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-xl": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "headline-xl-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .andean-pattern {
+            background-image: radial-gradient(circle at 2px 2px, #e3beb8 1px, transparent 0);
+            background-size: 24px 24px;
+            opacity: 0.1;
+        }
+        .sidebar-active {
+            background-color: #ffdad4;
+            color: #410000;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md min-h-screen flex">
+<!-- SideNavBar Component -->
+<aside class="h-screen w-64 fixed left-0 top-0 bg-surface-container-low dark:bg-surface-container-lowest flex flex-col p-4 border-r border-outline-variant z-40">
+<div class="mb-8 px-4">
+<div class="flex items-center gap-2">
+<div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined">school</span>
+</div>
+<div>
+<h1 class="font-headline-md text-sm font-bold text-primary dark:text-inverse-primary leading-tight">UNSAAC</h1>
+<p class="font-label-md text-[10px] text-on-surface-variant opacity-70 uppercase tracking-wider">Gestión Académica</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 space-y-2">
+<a class="flex items-center gap-base px-4 py-3 text-on-surface-variant hover:bg-surface-variant rounded-xl transition-all duration-200 cursor-pointer" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="flex items-center justify-between px-4 py-3 sidebar-active rounded-xl transition-all duration-200 cursor-pointer" href="#">
+<div class="flex items-center gap-base">
+<span class="material-symbols-outlined" data-icon="inbox">inbox</span>
+<span class="font-label-md text-label-md">Bandeja de Expedientes</span>
+</div>
+<span class="bg-primary text-on-primary text-[10px] font-bold px-1.5 py-0.5 rounded-full">12</span>
+</a>
+<a class="flex items-center gap-base px-4 py-3 text-on-surface-variant hover:bg-surface-variant rounded-xl transition-all duration-200 cursor-pointer" href="#">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+<span class="font-label-md text-label-md">Buscar Expediente</span>
+</a>
+<a class="flex items-center gap-base px-4 py-3 text-on-surface-variant hover:bg-surface-variant rounded-xl transition-all duration-200 cursor-pointer" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="font-label-md text-label-md">Reportes</span>
+</a>
+<a class="flex items-center gap-base px-4 py-3 text-on-surface-variant hover:bg-surface-variant rounded-xl transition-all duration-200 cursor-pointer" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-md text-label-md">Configuración</span>
+</a>
+</nav>
+<div class="mt-auto border-t border-outline-variant pt-4 space-y-1">
+<a class="flex items-center gap-base px-4 py-3 text-on-surface-variant hover:bg-surface-variant rounded-xl transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="font-label-md text-label-md">Centro de Ayuda</span>
+</a>
+<a class="flex items-center gap-base px-4 py-3 text-on-surface-variant hover:bg-surface-variant rounded-xl transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="font-label-md text-label-md">Cerrar Sesión</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 ml-64 min-h-screen flex flex-col relative">
+<div class="absolute inset-0 andean-pattern pointer-events-none"></div>
+<!-- TopNavBar Component -->
+<header class="sticky top-0 z-50 flex justify-between items-center px-gutter w-full h-20 bg-surface dark:bg-surface-container shadow-sm border-b border-outline-variant/30">
+<div class="flex items-center gap-gutter">
+<h2 class="font-headline-md text-xl font-bold text-primary">Panel Administrativo</h2>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2">
+<button class="p-2 hover:bg-surface-container-low rounded-full transition-colors relative cursor-pointer active:opacity-80">
+<span class="material-symbols-outlined text-primary" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full border-2 border-white"></span>
+</button>
+</div>
+<div class="h-8 w-[1px] bg-outline-variant"></div>
+<div class="flex items-center gap-3 pl-2">
+<div class="text-right hidden md:block">
+<p class="font-label-md text-label-md font-bold">María Quispe</p>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-wider">Tramitadora · Vice Rectorado Académico</p>
+</div>
+<div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center font-bold text-primary border-2 border-primary-fixed">MQ</div>
+</div>
+</div>
+</header>
+<!-- Dashboard Content -->
+<section class="p-gutter flex-1 relative z-10">
+<!-- Metrics Row -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+<div class="bg-white p-5 rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.04)] border-l-4 border-blue-500">
+<p class="font-label-md text-xs text-on-surface-variant uppercase tracking-tight">Recibidos</p>
+<div class="flex items-center justify-between mt-1">
+<p class="font-headline-lg text-headline-lg text-primary">8</p>
+<span class="material-symbols-outlined text-blue-500 bg-blue-50 p-2 rounded-lg" data-icon="download">download</span>
+</div>
+</div>
+<div class="bg-white p-5 rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.04)] border-l-4 border-amber-500">
+<p class="font-label-md text-xs text-on-surface-variant uppercase tracking-tight">En Revisión</p>
+<div class="flex items-center justify-between mt-1">
+<p class="font-headline-lg text-headline-lg text-primary">24</p>
+<span class="material-symbols-outlined text-amber-500 bg-amber-50 p-2 rounded-lg" data-icon="visibility">visibility</span>
+</div>
+</div>
+<div class="bg-white p-5 rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.04)] border-l-4 border-error">
+<p class="font-label-md text-xs text-on-surface-variant uppercase tracking-tight">Por Vencer</p>
+<div class="flex items-center justify-between mt-1">
+<p class="font-headline-lg text-headline-lg text-primary">3</p>
+<span class="material-symbols-outlined text-error bg-error-container p-2 rounded-lg" data-icon="warning">warning</span>
+</div>
+</div>
+<div class="bg-white p-5 rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.04)] border-l-4 border-green-600">
+<p class="font-label-md text-xs text-on-surface-variant uppercase tracking-tight">Resueltos</p>
+<div class="flex items-center justify-between mt-1">
+<p class="font-headline-lg text-headline-lg text-primary">47</p>
+<span class="material-symbols-outlined text-green-600 bg-green-50 p-2 rounded-lg" data-icon="task_alt">task_alt</span>
+</div>
+</div>
+</div>
+<!-- Management Table Section -->
+<div class="bg-white rounded-3xl shadow-[0_4px_20px_rgba(0,0,0,0.04)] overflow-hidden border border-outline-variant/30">
+<div class="p-6 border-b border-outline-variant/30">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div>
+<h2 class="font-headline-md text-headline-md text-primary">Bandeja de Expedientes</h2>
+<p class="font-label-md text-label-md text-on-surface-variant">Gestión de trámites académicos recibidos</p>
+</div>
+<div class="flex items-center gap-2 bg-surface-container-low p-1 rounded-xl">
+<button class="px-4 py-2 text-sm font-medium bg-white text-primary rounded-lg shadow-sm">Todos</button>
+<button class="px-4 py-2 text-sm font-medium text-on-surface-variant hover:bg-surface-variant rounded-lg transition-colors">En Revisión</button>
+<button class="px-4 py-2 text-sm font-medium text-on-surface-variant hover:bg-surface-variant rounded-lg transition-colors">Observados</button>
+<button class="px-4 py-2 text-sm font-medium text-on-surface-variant hover:bg-surface-variant rounded-lg transition-colors">Por vencer</button>
+<button class="px-4 py-2 text-sm font-medium text-on-surface-variant hover:bg-surface-variant rounded-lg transition-colors">Resueltos</button>
+</div>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead class="bg-surface-container-lowest text-on-surface-variant font-label-md uppercase tracking-wider text-[11px]">
+<tr>
+<th class="px-6 py-4">N° Expediente</th>
+<th class="px-6 py-4">Trámite</th>
+<th class="px-6 py-4">Solicitante</th>
+<th class="px-6 py-4">Fecha</th>
+<th class="px-6 py-4">Días restantes</th>
+<th class="px-6 py-4">Estado</th>
+<th class="px-6 py-4 text-right">Acciones</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/20">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-6 py-4 font-bold text-primary">2023-004512</td>
+<td class="px-6 py-4">
+<p class="text-sm font-medium">Grado de Bachiller</p>
+<p class="text-[10px] text-on-surface-variant">Ingeniería de Sistemas</p>
+</td>
+<td class="px-6 py-4 text-sm">Alanya, Maria</td>
+<td class="px-6 py-4 text-sm text-on-surface-variant">24/10/2023</td>
+<td class="px-6 py-4">
+<span class="text-sm font-bold text-amber-600">3 días</span>
+</td>
+<td class="px-6 py-4">
+<span class="bg-amber-100 text-amber-800 text-[10px] font-bold px-3 py-1 rounded-full border border-amber-200">
+                                    EN REVISIÓN
+                                </span>
+</td>
+<td class="px-6 py-4">
+<div class="flex justify-end gap-2">
+<button class="p-1.5 hover:bg-blue-50 text-blue-600 rounded-lg transition-colors" title="Ver">
+<span class="material-symbols-outlined text-xl">visibility</span>
+</button>
+<button class="p-1.5 hover:bg-green-50 text-green-600 rounded-lg transition-colors" title="Aprobar">
+<span class="material-symbols-outlined text-xl">check_circle</span>
+</button>
+<button class="p-1.5 hover:bg-error-container text-error rounded-lg transition-colors" title="Observar">
+<span class="material-symbols-outlined text-xl">report</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-6 py-4 font-bold text-primary">2023-004515</td>
+<td class="px-6 py-4">
+<p class="text-sm font-medium">Certificado de Estudios</p>
+<p class="text-[10px] text-on-surface-variant">Medicina Humana</p>
+</td>
+<td class="px-6 py-4 text-sm">Quispe, Juan Carlos</td>
+<td class="px-6 py-4 text-sm text-on-surface-variant">23/10/2023</td>
+<td class="px-6 py-4">
+<span class="text-sm font-bold text-error">1 día</span>
+</td>
+<td class="px-6 py-4">
+<span class="bg-red-100 text-red-800 text-[10px] font-bold px-3 py-1 rounded-full border border-red-200">
+                                    POR VENCER
+                                </span>
+</td>
+<td class="px-6 py-4">
+<div class="flex justify-end gap-2">
+<button class="p-1.5 hover:bg-blue-50 text-blue-600 rounded-lg transition-colors">
+<span class="material-symbols-outlined text-xl">visibility</span>
+</button>
+<button class="p-1.5 hover:bg-green-50 text-green-600 rounded-lg transition-colors">
+<span class="material-symbols-outlined text-xl">check_circle</span>
+</button>
+<button class="p-1.5 hover:bg-error-container text-error rounded-lg transition-colors">
+<span class="material-symbols-outlined text-xl">report</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-6 py-4 font-bold text-primary">2023-004520</td>
+<td class="px-6 py-4">
+<p class="text-sm font-medium">Matrícula Extemporánea</p>
+<p class="text-[10px] text-on-surface-variant">Arquitectura</p>
+</td>
+<td class="px-6 py-4 text-sm">Condori, Elena</td>
+<td class="px-6 py-4 text-sm text-on-surface-variant">23/10/2023</td>
+<td class="px-6 py-4">
+<span class="text-sm font-bold text-on-surface-variant">-</span>
+</td>
+<td class="px-6 py-4">
+<span class="bg-gray-100 text-gray-800 text-[10px] font-bold px-3 py-1 rounded-full border border-gray-200">
+                                    OBSERVADO
+                                </span>
+</td>
+<td class="px-6 py-4">
+<div class="flex justify-end gap-2">
+<button class="p-1.5 hover:bg-blue-50 text-blue-600 rounded-lg transition-colors">
+<span class="material-symbols-outlined text-xl">visibility</span>
+</button>
+<button class="p-1.5 hover:bg-green-50 text-green-600 rounded-lg transition-colors">
+<span class="material-symbols-outlined text-xl">check_circle</span>
+</button>
+<button class="p-1.5 hover:bg-error-container text-error rounded-lg transition-colors">
+<span class="material-symbols-outlined text-xl">report</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-6 bg-surface-container-low flex justify-between items-center">
+<p class="text-sm text-on-surface-variant">Mostrando <span class="font-bold">1 - 10</span> de 82 expedientes</p>
+<div class="flex gap-2">
+<button class="w-10 h-10 flex items-center justify-center border border-outline-variant rounded-xl hover:bg-white transition-all"><span class="material-symbols-outlined" data-icon="chevron_left">chevron_left</span></button>
+<button class="w-10 h-10 flex items-center justify-center bg-primary text-on-primary rounded-xl font-bold">1</button>
+<button class="w-10 h-10 flex items-center justify-center border border-outline-variant rounded-xl hover:bg-white transition-all font-bold">2</button>
+<button class="w-10 h-10 flex items-center justify-center border border-outline-variant rounded-xl hover:bg-white transition-all font-bold">3</button>
+<button class="w-10 h-10 flex items-center justify-center border border-outline-variant rounded-xl hover:bg-white transition-all"><span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span></button>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer Component -->
+<footer class="w-full py-8 bg-surface-container-highest dark:bg-surface-container-high mt-auto relative z-10">
+<div class="flex flex-col md:flex-row justify-between items-center px-gutter w-full max-w-container-max mx-auto gap-4">
+<div class="flex flex-col md:flex-row items-center gap-6">
+<span class="font-body-md text-body-md font-bold text-on-surface">UNSAAC Portal</span>
+<div class="flex gap-4">
+<a class="text-on-surface-variant hover:text-primary font-label-md text-label-md hover:underline transition-all" href="#">Transparencia</a>
+<a class="text-on-surface-variant hover:text-primary font-label-md text-label-md hover:underline transition-all" href="#">Políticas de Privacidad</a>
+<a class="text-on-surface-variant hover:text-primary font-label-md text-label-md hover:underline transition-all" href="#">Correo Institucional</a>
+<a class="text-on-surface-variant hover:text-primary font-label-md text-label-md hover:underline transition-all" href="#">Contacto</a>
+</div>
+</div>
+<p class="font-label-md text-label-md text-on-surface-variant opacity-80">
+                © 2024 Universidad Nacional de San Antonio Abad del Cusco. Todos los derechos reservados.
+            </p>
+</div>
+</footer>
+</main>
+<script>
+    // Atmospheric effect: Subtle grain/noise over Andean pattern
+    const main = document.querySelector('main');
+    main.addEventListener('mousemove', (e) => {
+        const x = e.clientX / window.innerWidth;
+        const y = e.clientY / window.innerHeight;
+        document.querySelector('.andean-pattern').style.opacity = 0.08 + (x * 0.04);
+    });
+</script>
+</body></html>
