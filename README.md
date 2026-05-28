@@ -29,9 +29,11 @@ La plataforma permitirá consultar trámites, requisitos, costos y plazos de ate
 - `prototipo/`: prototipos dinámicos de la plataforma.
 
 ## Integrantes
-- Adel 
-- Rayned 
-- Natan 
+- Christian Pumaccahua Cusihuaman – 204805@unsaac.edu.pe
+- Brenda Lucia Mayhuire Chacon – 231445@unsaac.edu.pe
+- Líder Condori Huillca – 145213@unsaac.edu.pe
+- George Ivanok Muñoz Castillo – 204800@unsaac.edu.pe
+- Haider Alex Carpio Hermoza – 164563@unsaac.edu.pe
 
 ## Herramientas utilizadas
 - GitHub Desktop
