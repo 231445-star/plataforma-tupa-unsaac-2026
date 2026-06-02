@@ -1,0 +1,384 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ─────────────────────────────────────────────
+// Enum compartido para el estado de la solicitud
+// ─────────────────────────────────────────────
+enum EstadoSolicitud {
+  SOLICITADO
+  EN_PROCESO
+  PAGADO
+  PAGADO_SIN_ADJUNTO
+  ANULADO
+  CERRADO
+
+  @@map("cestado")
+}
+
+enum EstadoDocumento {
+  PENDIENTE
+  VALIDADO
+  OBSERVADO
+}
+
+// ─────────────────────────────────────────────
+// Padrón de estudiantes (fuente de identificación)
+// ─────────────────────────────────────────────
+model Alumno {
+  codigoalumno   String  @id @db.VarChar(20)
+  apalumno       String? @db.VarChar(100)
+  amalumno       String? @db.VarChar(100)
+  nombresalumno  String? @db.VarChar(150)
+  dni            String? @db.VarChar(15)
+  telefono       String? @db.VarChar(20)
+  email          String? @db.VarChar(100)
+  codigosede     String? @db.VarChar(10)
+  activo         Boolean @default(true)
+
+  @@map("talumno")
+}
+
+// ─────────────────────────────────────────────
+// Solicitante (datos capturados al iniciar trámite)
+// ─────────────────────────────────────────────
+model Solicitante {
+  ccodigosolicitante String  @id @db.VarChar(20)
+  cnumerodocumento   String? @db.VarChar(20)
+  cnombres           String? @db.VarChar(150)
+  capellidopaterno   String? @db.VarChar(100)
+  capellidomaterno   String? @db.VarChar(100)
+  // Campos agregados (RF-04, D-1)
+  cemail             String? @db.VarChar(100)
+  ctelefono          String? @db.VarChar(20)
+
+  solicitudes Solicitud[]
+
+  @@map("tsolicitante")
+}
+
+// ─────────────────────────────────────────────
+// Catálogo de trámites TUPA
+// ─────────────────────────────────────────────
+model Tramite {
+  ccodigo              String  @id @db.VarChar(20)
+  cdenominaciontramite String  @db.VarChar(300)
+  cdescripcion         String? @db.VarChar(500)
+  ccodigobanco         String? @db.VarChar(20)
+  btienemontofijo      Boolean @default(false)
+  // Campo agregado para baja lógica (RF-13, D-5)
+  bactivo              Boolean @default(true)
+
+  requisitos    Requisito[]
+  montos        Monto[]
+  detallesSol   DetalleSolicitud[]
+  unidadesTram  UnidadTramite[]
+
+  @@map("tcatalogotramite")
+}
+
+// ─────────────────────────────────────────────
+// Requisitos del trámite
+// ─────────────────────────────────────────────
+model Requisito {
+  nidtrequisitotramite Int    @id @default(autoincrement())
+  ccodigo              String @db.VarChar(20)
+  cdescripcionrequisito String @db.VarChar(500)
+
+  tramite Tramite @relation(fields: [ccodigo], references: [ccodigo])
+
+  @@map("trequisitotramite")
+}
+
+// ─────────────────────────────────────────────
+// Montos con vigencia (histórico de precios)
+// ─────────────────────────────────────────────
+model Monto {
+  nidtmontotramite Int       @id @default(autoincrement())
+  ccodigo          String    @db.VarChar(20)
+  nmonto           Decimal   @db.Decimal(10, 2)
+  cdescripcionpago String?   @db.VarChar(300)
+  dfechainicio     DateTime? @db.Date
+  dfechafin        DateTime? @db.Date
+
+  tramite      Tramite            @relation(fields: [ccodigo], references: [ccodigo])
+  detallesSol  DetalleSolicitud[]
+
+  @@map("tmontotramite")
+}
+
+// ─────────────────────────────────────────────
+// Solicitud de trámite (núcleo del flujo)
+// ─────────────────────────────────────────────
+model Solicitud {
+  nidtsolicitudtramite  BigInt          @id @default(autoincrement())
+  ccodigosolicitante    String          @db.VarChar(20)
+  dfechapeticion        DateTime?
+  dfecharegistro        DateTime        @default(now())
+  ccomprobantepath      String?         @db.VarChar(500)
+  cnumerotransaccion    String?         @db.VarChar(50)
+  dfechapago            DateTime?
+  cestado               EstadoSolicitud @default(SOLICITADO)
+  // Código único de seguimiento (RF-06)
+  cidtsolicitudtramite  String          @unique @db.VarChar(50)
+
+  solicitante   Solicitante        @relation(fields: [ccodigosolicitante], references: [ccodigosolicitante])
+  detalles      DetalleSolicitud[]
+  historial     HistorialEstado[]
+  documentos    DocumentoSolicitud[]
+  notificaciones Notificacion[]
+  comprobantes  ComprobantePago[]
+
+  @@index([ccodigosolicitante, cestado])
+  @@index([cidtsolicitudtramite])
+  @@map("tsolicitudtramite")
+}
+
+// ─────────────────────────────────────────────
+// Detalle de la solicitud (qué trámite y a qué monto)
+// ─────────────────────────────────────────────
+model DetalleSolicitud {
+  nidtsolicitudtramitedetalle BigInt  @id @default(autoincrement())
+  nidtsolicitudtramite        BigInt
+  ccodigo                     String  @db.VarChar(20)
+  nidtmontotramite            Int
+  ncantidad                   Int     @default(1)
+  nmontotramite               Decimal @db.Decimal(10, 2)
+
+  solicitud Solicitud @relation(fields: [nidtsolicitudtramite], references: [nidtsolicitudtramite])
+  tramite   Tramite   @relation(fields: [ccodigo], references: [ccodigo])
+  monto     Monto     @relation(fields: [nidtmontotramite], references: [nidtmontotramite])
+
+  @@map("tsolicitudtramitedetalle")
+}
+
+// ─────────────────────────────────────────────
+// Comprobante de pago (RF-07, RF-08)
+// ─────────────────────────────────────────────
+model ComprobantePago {
+  cnumerocomprobante   String   @db.VarChar(20)
+  cserie               String   @db.VarChar(10)
+  nidtsolicitudtramite BigInt
+  dfechaemision        DateTime @default(now())
+  ntotal               Decimal  @db.Decimal(10, 2)
+
+  solicitud Solicitud             @relation(fields: [nidtsolicitudtramite], references: [nidtsolicitudtramite])
+  detalles  DetalleComprobante[]
+  recibos   ReciboIngreso[]
+
+  @@id([cnumerocomprobante, cserie])
+  @@map("tcomprobantepago")
+}
+
+model DetalleComprobante {
+  nidtdetallecomprobante BigInt  @id @default(autoincrement())
+  cnumerocomprobante     String  @db.VarChar(20)
+  cserie                 String  @db.VarChar(10)
+  cdescripcion           String? @db.VarChar(300)
+  nmonto                 Decimal @db.Decimal(10, 2)
+
+  comprobante ComprobantePago @relation(fields: [cnumerocomprobante, cserie], references: [cnumerocomprobante, cserie])
+
+  @@map("tdetallecomprobantepago")
+}
+
+// ─────────────────────────────────────────────
+// Recibos de ingreso (base de reportes)
+// ─────────────────────────────────────────────
+model ReciboIngreso {
+  nidtreciboingreso  BigInt   @id @default(autoincrement())
+  cnumerocomprobante String   @db.VarChar(20)
+  cserie             String   @db.VarChar(10)
+  dfechaemision      DateTime @default(now())
+
+  comprobante ComprobantePago   @relation(fields: [cnumerocomprobante, cserie], references: [cnumerocomprobante, cserie])
+  detalles    DetalleRecibo[]
+
+  @@map("treciboingreso")
+}
+
+model DetalleRecibo {
+  nidtreciboingresodetalle BigInt  @id @default(autoincrement())
+  nidtreciboingreso        BigInt
+  cdescripcion             String? @db.VarChar(300)
+  nmonto                   Decimal @db.Decimal(10, 2)
+
+  recibo ReciboIngreso @relation(fields: [nidtreciboingreso], references: [nidtreciboingreso])
+
+  @@map("treciboingresodetalle")
+}
+
+// ─────────────────────────────────────────────
+// Organización
+// ─────────────────────────────────────────────
+model UnidadOrganizativa {
+  cidunidadorganizativa String  @id @db.VarChar(20)
+  cdescripcion          String? @db.VarChar(200)
+  bactivo               Boolean @default(true)
+
+  unidadesTramite UnidadTramite[]
+
+  @@map("tunidadorganizativa")
+}
+
+model UnidadTramite {
+  nidtunidadtramite     Int    @id @default(autoincrement())
+  ccodigo               String @db.VarChar(20)
+  cidunidadorganizativa String @db.VarChar(20)
+
+  tramite    Tramite            @relation(fields: [ccodigo], references: [ccodigo])
+  unidad     UnidadOrganizativa @relation(fields: [cidunidadorganizativa], references: [cidunidadorganizativa])
+  series     SerieUnidadTramite[]
+
+  @@map("tunidadtramite")
+}
+
+model SerieUnidadTramite {
+  nidtserieunidadtramite Int    @id @default(autoincrement())
+  nidtunidadtramite      Int
+  cserie                 String @db.VarChar(10)
+
+  unidadTramite UnidadTramite @relation(fields: [nidtunidadtramite], references: [nidtunidadtramite])
+
+  @@map("tserieunidadtramite")
+}
+
+// ─────────────────────────────────────────────
+// Seguridad — usuarios, perfiles, login, tokens
+// ─────────────────────────────────────────────
+model Usuario {
+  cidtusuario String  @id @db.VarChar(20)
+  cnombres    String? @db.VarChar(150)
+  cpaterno    String? @db.VarChar(100)
+  cmaterno    String? @db.VarChar(100)
+  ccorreo     String? @db.VarChar(100)
+  ctelefono   String? @db.VarChar(20)
+  bactivo     Boolean @default(true)
+
+  logins Login[]
+
+  @@map("tusuario")
+}
+
+model Perfil {
+  nidtperfil          Int    @id @default(autoincrement())
+  cdescripcionperfil  String @db.VarChar(100)
+
+  logins    Login[]
+  menuItems MenuPerfil[]
+
+  @@map("tperfil")
+}
+
+model Login {
+  clogin       String  @id @db.VarChar(50)
+  cidtusuario  String  @db.VarChar(20)
+  nidtperfil   Int
+  ccontrasenia String  @db.VarChar(255)
+  bactivo      Boolean @default(true)
+
+  usuario Usuario @relation(fields: [cidtusuario], references: [cidtusuario])
+  perfil  Perfil  @relation(fields: [nidtperfil], references: [nidtperfil])
+  tokens  Token[]
+
+  @@map("tlogin")
+}
+
+model Token {
+  nidttoken        Int      @id @default(autoincrement())
+  clogin           String   @db.VarChar(50)
+  ctoken           String   @db.VarChar(500)
+  dfechacreacion   DateTime @default(now())
+  dfechaexpiracion DateTime
+  bactivo          Boolean  @default(true)
+
+  login Login @relation(fields: [clogin], references: [clogin])
+
+  @@map("ttoken")
+}
+
+model Modulo {
+  nidtmodulo   Int    @id @default(autoincrement())
+  cdescripcion String @db.VarChar(100)
+
+  menuItems MenuPerfil[]
+
+  @@map("tmodulo")
+}
+
+model MenuPerfil {
+  nidtmenuperfil Int     @id @default(autoincrement())
+  nidtperfil     Int
+  nidtmodulo     Int
+  bactivo        Boolean @default(true)
+
+  perfil Perfil @relation(fields: [nidtperfil], references: [nidtperfil])
+  modulo Modulo @relation(fields: [nidtmodulo], references: [nidtmodulo])
+
+  @@map("tmenuperfil")
+}
+
+// ─────────────────────────────────────────────
+// TABLAS NUEVAS
+// ─────────────────────────────────────────────
+
+// RF-09, RF-10 — Documentos adjuntos a la solicitud
+model DocumentoSolicitud {
+  nid                  Int             @id @default(autoincrement())
+  nidtsolicitudtramite BigInt
+  cnombrearchivo       String          @db.VarChar(255)
+  ctipo                String          @db.VarChar(10)
+  ntamanio             Int
+  cruta                String          @db.VarChar(500)
+  cestado              EstadoDocumento @default(PENDIENTE)
+  cobservacion         String?         @db.VarChar(500)
+  dfechasubida         DateTime        @default(now())
+
+  solicitud Solicitud @relation(fields: [nidtsolicitudtramite], references: [nidtsolicitudtramite])
+
+  @@map("tdocumento_solicitud")
+}
+
+// RF-06, RF-15 — Historial de transiciones de estado
+model HistorialEstado {
+  nid                  Int      @id @default(autoincrement())
+  nidtsolicitudtramite BigInt
+  cestadoanterior      String   @db.VarChar(30)
+  cestadonuevo         String   @db.VarChar(30)
+  cmotivo              String?  @db.VarChar(500)
+  cusuario             String?  @db.VarChar(50)
+  dfecha               DateTime @default(now())
+
+  solicitud Solicitud @relation(fields: [nidtsolicitudtramite], references: [nidtsolicitudtramite])
+
+  @@map("thistorial_estado")
+}
+
+// RF-11 — Notificaciones in-app
+model Notificacion {
+  nid                  Int      @id @default(autoincrement())
+  nidtsolicitudtramite BigInt
+  cmensaje             String   @db.VarChar(300)
+  bleida               Boolean  @default(false)
+  dfecha               DateTime @default(now())
+
+  solicitud Solicitud @relation(fields: [nidtsolicitudtramite], references: [nidtsolicitudtramite])
+
+  @@map("tnotificacion")
+}
+
+// RF-20 — Auditoría de acciones sensibles
+model Auditoria {
+  nid      Int      @id @default(autoincrement())
+  cusuario String?  @db.VarChar(50)
+  caccion  String   @db.VarChar(100)
+  cdetalle String?  @db.VarChar(500)
+  dfecha   DateTime @default(now())
+
+  @@map("tauditoria")
+}

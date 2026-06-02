@@ -1,0 +1,25 @@
+# Dependencias y builds
+node_modules/
+dist/
+build/
+.next/
+coverage/
+
+# Lockfiles (ruido en el contexto)
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Secretos — NUNCA exponer
+.env
+.env.*
+*.pem
+*.key
+
+# Dumps de base de datos (muy grandes)
+*.sql
+*.dump
+
+# Archivos del sistema
+.DS_Store
+*.log
